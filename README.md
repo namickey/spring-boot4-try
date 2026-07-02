@@ -1,6 +1,6 @@
 # spring-boot4-try
 
-Spring Boot 4.0 を使ったシンプルなブログシステム「Spring Blog」です。
+Spring Boot 4.0 を使ったシンプルなブログシステム「エンジニアBlog」です。
 記事の一覧表示・詳細表示・投稿・編集・削除ができます。
 
 ## 技術スタック
@@ -47,8 +47,3 @@ mvnw.cmd spring-boot:run
 | `/articles/new` | 記事投稿フォーム |
 | `/articles/{id}/edit` | 記事編集フォーム |
 
-## テスト実行
-
-```bash
-./mvnw test
-```
