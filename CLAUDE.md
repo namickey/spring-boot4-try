@@ -4,7 +4,7 @@
 
 **「Spring Blog」** - 記事の投稿・管理ができるシンプルなブログシステム
 
-Spring Boot 4.1 を使った Web サンプルアプリケーション。
+Spring Boot 4.0 を使った Web サンプルアプリケーション。
 
 ---
 
@@ -12,12 +12,10 @@ Spring Boot 4.1 を使った Web サンプルアプリケーション。
 
 | 役割 | 技術 |
 |------|------|
-| フレームワーク | Spring Boot 4.1 |
+| フレームワーク | Spring Boot 4.0.7 |
 | テンプレートエンジン | Thymeleaf |
-| 認証 | Spring Security |
 | データアクセス | MyBatis (mybatis-spring-boot-starter) |
 | DB | H2（開発・本番共通） |
-| バリデーション | Bean Validation |
 | ビルド | Maven (Maven Wrapper / mvnw) |
 | Java | Java 21 |
 
@@ -25,18 +23,12 @@ Spring Boot 4.1 を使った Web サンプルアプリケーション。
 
 ## 機能一覧
 
-### 認証
-- ログイン / ログアウト
-- ユーザーは `data.sql` で初期登録（登録画面なし）
-
 ### 記事管理
 
-| 機能 | 誰が使えるか |
-|------|------------|
-| 記事一覧表示 | 全員（未ログインでも可） |
-| 記事詳細表示 | 全員 |
-| 記事投稿 | ログインユーザー |
-| 記事編集・削除 | 投稿者本人のみ |
+- 記事一覧表示
+- 記事詳細表示
+- 記事投稿
+- 記事編集・削除
 
 ---
 
@@ -47,7 +39,6 @@ Spring Boot 4.1 を使った Web サンプルアプリケーション。
 /articles/{id} ........ 記事詳細
 /articles/new ......... 記事投稿フォーム
 /articles/{id}/edit ... 記事編集フォーム
-/login ................ ログイン
 ```
 
 ---
@@ -55,16 +46,10 @@ Spring Boot 4.1 を使った Web サンプルアプリケーション。
 ## データモデル
 
 ```
-User
-├── id
-├── username
-└── password (BCrypt)
-
 Article
 ├── id
 ├── title
 ├── content
-├── author (User)
 ├── createdAt
 └── updatedAt
 ```
@@ -74,6 +59,6 @@ Article
 ## データアクセス方針（MyBatis）
 
 - Mapper インターフェース + SQL で実装
-- DDL は `src/main/resources/schema.sql` で管理
-- 初期データは `src/main/resources/data.sql` で管理
+- DDL は `src/main/resources/schema-all.sql` で管理
+- 初期データは `src/main/resources/data-all.sql` で管理
 - SQL は XML マッパー (`src/main/resources/mapper/*.xml`) で記述
