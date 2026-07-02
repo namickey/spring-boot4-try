@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head(${article.title})}"></head>
+<body>
+    <header th:replace="~{fragments/common :: nav}"></header>
+    <main class="container col-lg-8 mt-4 mb-5">
+        <div class="card mb-3">
+            <div class="card-body">
+                <h2 class="card-title" th:text="${article.title}">タイトル</h2>
+                <div class="text-muted small mb-3">
+                    投稿日: <span th:text="${#temporals.format(article.createdAt, 'yyyy-MM-dd HH:mm')}">2026-01-01</span>
+                    / 更新日: <span th:text="${#temporals.format(article.updatedAt, 'yyyy-MM-dd HH:mm')}">2026-01-01</span>
+                </div>
+                <div style="white-space: pre-wrap;" th:text="${article.content}">本文</div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" th:href="@{'/articles/' + ${article.id} + '/edit'}">編集</a>
+            <form th:action="@{'/articles/' + ${article.id} + '/delete'}" method="post" onsubmit="return confirm('削除しますか？');">
+                <button type="submit" class="btn btn-danger">削除</button>
+            </form>
+            <a class="btn btn-secondary" th:href="@{/}">一覧へ戻る</a>
+        </div>
+    </main>
+</body>
+</html>
