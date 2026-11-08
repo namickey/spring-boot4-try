@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,8 +8,15 @@
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark" th:fragment="nav">
-        <div class="container">
+        <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand fw-bold" th:href="@{/}">エンジニアBlog</a>
+            <div class="d-flex align-items-center gap-2">
+                <span class="navbar-text text-light" sec:authorize="isAuthenticated()" sec:authentication="name">username</span>
+                <form class="d-inline" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+                    <button type="submit" class="btn btn-outline-light">ログアウト</button>
+                </form>
+                <a class="btn btn-outline-light" th:href="@{/login}" sec:authorize="isAnonymous()">ログイン</a>
+            </div>
         </div>
     </nav>
 </body>
