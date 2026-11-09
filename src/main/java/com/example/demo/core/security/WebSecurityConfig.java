@@ -20,11 +20,12 @@ public class WebSecurityConfig {
             .permitAll()
         // ログアウト
         ).logout(logout -> logout
-            .logoutSuccessUrl("/login")
+            .logoutSuccessUrl("/")
         ).authorizeHttpRequests(authz -> authz
             .requestMatchers("/").permitAll()
             .requestMatchers("/articles/new/**").authenticated()
-            .requestMatchers("/articles/*/edit/").authenticated()
+            .requestMatchers("/articles/*/edit").authenticated()
+            .requestMatchers("/articles/*/delete").authenticated()
             .requestMatchers("/articles/*").permitAll()
             // その他画面は認証済みが必須
             .anyRequest().authenticated()

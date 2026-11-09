@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/common :: head(${article.title})}"></head>
 <body>
     <header th:replace="~{fragments/common :: nav}"></header>
@@ -16,11 +16,11 @@
         </div>
 
         <div class="d-flex gap-2">
-            <a class="btn btn-primary" th:href="@{'/articles/' + ${article.id} + '/edit'}">編集</a>
-            <form th:action="@{'/articles/' + ${article.id} + '/delete'}" method="post" onsubmit="return confirm('削除しますか？');">
-                <button type="submit" class="btn btn-danger">削除</button>
-            </form>
             <a class="btn btn-secondary" th:href="@{/}">一覧へ戻る</a>
+            <a class="btn btn-primary" th:href="@{'/articles/' + ${article.id} + '/edit'}" sec:authorize="isAuthenticated()">編集</a>
+            <form th:action="@{'/articles/' + ${article.id} + '/delete'}" method="post" onsubmit="return confirm('削除しますか？');">
+                <button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()">削除</button>
+            </form>
         </div>
     </main>
 </body>
