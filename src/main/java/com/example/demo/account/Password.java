@@ -1,10 +1,9 @@
-package com.example.demo.account.password;
+package com.example.demo.account;
 
 import lombok.Data;
 
 @Data
-public class Account {
-
+public class Password {
     private String newPassword;
     private String reNewPassword;
 }

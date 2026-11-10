@@ -6,15 +6,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class ArticleService {
 
     private final ArticleMapper articleMapper;
-
-    public ArticleService(ArticleMapper articleMapper) {
-        this.articleMapper = articleMapper;
-    }
 
     @Transactional(readOnly = true)
     public List<Article> findAll() {

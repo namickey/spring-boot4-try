@@ -12,9 +12,7 @@
             <a class="navbar-brand fw-bold" th:href="@{/}">エンジニアBlog</a>
             <div class="d-flex align-items-center gap-2">
                 <span class="navbar-text text-light" sec:authorize="isAuthenticated()" sec:authentication="name">username</span>
-                <form class="d-inline" th:action="@{/account/password/edit}" method="post" sec:authorize="isAuthenticated()">
-                    <button type="submit" class="btn btn-outline-light">パスワード変更</button>
-                </form>
+                <a class="btn btn-outline-light" th:href="@{/account/password/edit}" sec:authorize="isAuthenticated()">パスワード変更</a>
                 <form class="d-inline" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
                     <button type="submit" class="btn btn-outline-light">ログアウト</button>
                 </form>
