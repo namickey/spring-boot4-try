@@ -4,6 +4,7 @@
 <body>
     <header th:replace="~{fragments/common :: nav}"></header>
     <main class="container mt-4 mb-5">
+        <div class="alert alert-success" th:if="${message}" th:text="${message}"></div>
         <div class="card mb-3">
             <div class="card-body">
                 <h2 class="card-title" th:text="${article.title}">タイトル</h2>
@@ -18,8 +19,9 @@
         <div class="d-flex gap-2">
             <a class="btn btn-secondary" th:href="@{/}">一覧へ戻る</a>
             <a class="btn btn-primary" th:href="@{'/articles/' + ${article.id} + '/edit'}" sec:authorize="isAuthenticated()">編集</a>
-            <form th:action="@{'/articles/' + ${article.id} + '/delete'}" method="post" onsubmit="return confirm('削除しますか？');">
-                <button type="submit" class="btn btn-danger" sec:authorize="isAuthenticated()">削除</button>
+            <form th:action="@{'/articles/' + ${article.id} + '/delete'}" method="post" onsubmit="return confirm('削除しますか？');" sec:authorize="isAuthenticated()">
+                <input type="hidden" name="versionNo" th:value="${article.versionNo}">
+                <button type="submit" class="btn btn-danger">削除</button>
             </form>
         </div>
     </main>

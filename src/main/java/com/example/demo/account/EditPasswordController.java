@@ -1,7 +1,9 @@
 package com.example.demo.account;
 
+import java.util.Locale;
 import java.util.Objects;
 
+import org.springframework.context.MessageSource;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,9 +18,10 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class PasswordController {
+public class EditPasswordController {
 
     private final AccountService accountService;
+    private final MessageSource messages;
 
     @GetMapping("/account/password/edit")
     public String editForm(Authentication authentication, Model model) {
@@ -39,7 +41,7 @@ public class PasswordController {
         }
 
         if (!Objects.equals(password.getNewPassword(), password.getReNewPassword())) {
-            model.addAttribute("error", "新しいパスワードと確認用パスワードが一致しません。");
+            model.addAttribute("error", messages.getMessage("ME001", null, Locale.getDefault()));
             return "account/password-edit";
         }
         try {
@@ -49,7 +51,7 @@ public class PasswordController {
             return "account/password-edit";
         }
 
-        redirectAttributes.addFlashAttribute("message", "新しいパスワードへの変更が完了しました。");
+        redirectAttributes.addFlashAttribute("message", messages.getMessage("MI004", null, Locale.getDefault()));
         return "redirect:/account/password/edit";
     }
 }

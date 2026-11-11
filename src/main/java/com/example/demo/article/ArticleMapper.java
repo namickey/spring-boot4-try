@@ -14,8 +14,8 @@ public interface ArticleMapper {
 
     void insert(Article article);
 
-    void update(Article article);
+    int update(Article article);
 
-    void deleteById(@Param("id") Long id);
+    int deleteById(@Param("id") Long id, @Param("versionNo") Integer versionNo);
 
 }

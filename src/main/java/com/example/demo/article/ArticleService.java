@@ -1,10 +1,12 @@
 package com.example.demo.article;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,24 +23,30 @@ public class ArticleService {
     }
 
     @Transactional(readOnly = true)
-    public Article findById(Long id) {
-        return articleMapper.findById(id);
+    public Article getById(Long id) {
+        Article article = articleMapper.findById(id);
+        if (article == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found: " + id);
+        }
+        return article;
     }
 
     public void create(Article article) {
-        LocalDateTime now = LocalDateTime.now();
-        article.setCreatedAt(now);
-        article.setUpdatedAt(now);
         articleMapper.insert(article);
     }
 
     public void update(Article article) {
-        article.setUpdatedAt(LocalDateTime.now());
-        articleMapper.update(article);
+        int i = articleMapper.update(article);
+        if (i == 0) {
+            throw new OptimisticLockingFailureException("ME901");
+        }
     }
 
-    public void deleteById(Long id) {
-        articleMapper.deleteById(id);
+    public void deleteById(Long id, Integer versionNo) {
+        int i = articleMapper.deleteById(id, versionNo);
+        if (i == 0) {
+            throw new OptimisticLockingFailureException("ME901");
+        }
     }
 
 }

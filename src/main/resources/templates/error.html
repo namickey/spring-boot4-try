@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/common :: head('エラー')}"></head>
+<body>
+    <header th:replace="~{fragments/common :: nav}"></header>
+    <main class="container mt-4 mb-5">
+        <h1 class="h3 mb-4">エラー</h1>
+        <div class="alert alert-danger" th:text="${message} ?: #{ME999}">システムエラーが発生しました。</div>
+        <a class="btn btn-secondary" th:href="@{/}">一覧へ戻る</a>
+    </main>
+</body>
+</html>

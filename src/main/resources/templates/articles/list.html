@@ -4,6 +4,8 @@
 <body>
     <header th:replace="~{fragments/common :: nav}"></header>
     <main class="container mt-4 mb-5">
+        <div class="alert alert-success" th:if="${message}" th:text="${message}"></div>
+        <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
         <div class="text-end mb-3">
             <a class="btn btn-primary" th:href="@{/articles/new}" sec:authorize="isAuthenticated()">新規投稿</a>
             <a class="btn btn-primary invisible" href="#" aria-hidden="true" tabindex="-1" sec:authorize="isAnonymous()">新規投稿</a>

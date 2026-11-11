@@ -9,17 +9,19 @@
             roles,
             password,
             email,
-            regist_date,
+            created_at,
+            updated_at,
             version_no
         from
-            account
+            accounts
         where
             username = #{username}
     </select>
 
     <update id="update">
-        UPDATE account
+        UPDATE accounts
         SET password = #{password}
+        , updated_at = CURRENT_TIMESTAMP
         , version_no = #{versionNo} + 1
         WHERE username = #{username}
         AND version_no = #{versionNo}

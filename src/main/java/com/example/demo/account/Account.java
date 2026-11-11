@@ -1,6 +1,6 @@
 package com.example.demo.account;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -10,6 +10,7 @@ public class Account {
     private String roles;
     private String password;
     private String email;
-    private LocalDate registDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private Integer versionNo;
 }
