@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,19 +31,24 @@ public class PasswordController {
     }
 
     @PostMapping("/account/password/edit")
-    public String edit(@ModelAttribute Password password, Authentication authentication, Model model,
-            RedirectAttributes redirectAttributes, BindingResult result) {
+    public String edit(@Validated Password password, BindingResult result, Authentication authentication, Model model,
+            RedirectAttributes redirectAttributes) {
+
+        if (result.hasErrors()) {
+            return "account/password-edit";
+        }
+
         if (!Objects.equals(password.getNewPassword(), password.getReNewPassword())) {
             model.addAttribute("error", "新しいパスワードと確認用パスワードが一致しません。");
             return "account/password-edit";
         }
         try {
             accountService.update(authentication.getName(), password.getNewPassword(), password.getVersionNo());
-        } catch (OptimisticLockingFailureException e){
+        } catch (OptimisticLockingFailureException e) {
             result.reject(e.getMessage());
             return "account/password-edit";
         }
-        
+
         redirectAttributes.addFlashAttribute("message", "新しいパスワードへの変更が完了しました。");
         return "redirect:/account/password/edit";
     }
