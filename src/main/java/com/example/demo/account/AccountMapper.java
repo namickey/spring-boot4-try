@@ -12,5 +12,5 @@ public interface AccountMapper {
      */
     Account findByUsername(String username);
 
-    void update(String username, String password);
+    int update(String username, String password, Integer versionNo);
 }

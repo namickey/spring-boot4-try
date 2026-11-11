@@ -20,7 +20,9 @@
     <update id="update">
         UPDATE account
         SET password = #{password}
+        , version_no = #{versionNo} + 1
         WHERE username = #{username}
+        AND version_no = #{versionNo}
     </update>
 
 </mapper>
