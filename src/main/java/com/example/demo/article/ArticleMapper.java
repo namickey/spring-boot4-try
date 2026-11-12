@@ -12,7 +12,7 @@ public interface ArticleMapper {
 
     Article findById(@Param("id") Long id);
 
-    void insert(Article article);
+    int insert(Article article);
 
     int update(Article article);
 

@@ -24,12 +24,12 @@ public class EditArticleController {
 
     @GetMapping("/articles/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
-        model.addAttribute("editArticleForm", articleService.getById(id));
+        model.addAttribute("editArticleForm", new EditArticleForm(articleService.getById(id)));
         return "articles/edit";
     }
 
     @PostMapping("/articles/{id}/edit")
-    public String update(@PathVariable Long id, @Validated EditArticleForm form, BindingResult result,
+    public String edit(@PathVariable Long id, @Validated EditArticleForm form, BindingResult result,
             RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "articles/edit";

@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class DeleteArticleForm {
+    
     @NotNull
     private Integer versionNo;
 }

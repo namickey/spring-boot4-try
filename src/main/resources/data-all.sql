@@ -5,4 +5,4 @@ INSERT INTO articles (title, content, created_at, updated_at) VALUES
 
 INSERT INTO accounts (username, roles, password, email, created_at, updated_at) VALUES
 ('root', 'USER,DATA_MANAGER', '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'root@xxx', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('user', 'USER', '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'data@xxx', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('user', 'USER', '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'user@xxx', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

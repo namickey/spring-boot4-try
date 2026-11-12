@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EditArticleForm {
 
+    @NotNull
+    private Long id;
+
     @NotBlank
     @Length(max = 200)
     private String title;

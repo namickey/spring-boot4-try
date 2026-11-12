@@ -45,7 +45,7 @@ public class EditPasswordController {
             return "account/password-edit";
         }
         try {
-            accountService.update(authentication.getName(), form.getNewPassword(), form.getVersionNo());
+            accountService.updatePassword(authentication.getName(), form.getNewPassword(), form.getVersionNo());
         } catch (OptimisticLockingFailureException e) {
             result.reject(e.getMessage());
             return "account/password-edit";
