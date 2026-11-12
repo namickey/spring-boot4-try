@@ -5,7 +5,7 @@
     <header th:replace="~{fragments/common :: nav}"></header>
     <main class="container mt-4 mb-5">
         <h1 class="h3 mb-4">記事編集</h1>
-        <form th:action="@{'/articles/' + ${article.id} + '/edit'}" th:object="${article}" method="post">
+        <form th:action="@{'/articles/' + ${editArticleForm.id} + '/edit'}" th:object="${editArticleForm}" method="post">
             <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></div>
             <div class="mb-3">
                 <label class="form-label" for="title">タイトル</label>
@@ -25,7 +25,7 @@
 
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-primary">更新する</button>
-                <a class="btn btn-secondary" th:href="@{'/articles/' + ${article.id}}">キャンセル</a>
+                <a class="btn btn-secondary" th:href="@{'/articles/' + ${editArticleForm.id}}">キャンセル</a>
             </div>
         </form>
     </main>

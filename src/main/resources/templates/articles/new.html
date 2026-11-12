@@ -5,7 +5,7 @@
     <header th:replace="~{fragments/common :: nav}"></header>
     <main class="container mt-4 mb-5">
         <h1 class="h3 mb-4">新規投稿</h1>
-        <form th:action="@{/articles/new}" th:object="${article}" method="post">
+        <form th:action="@{/articles/new}" th:object="${newArticleForm}" method="post">
             <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></div>
             <div class="mb-3">
                 <label class="form-label" for="title">タイトル</label>

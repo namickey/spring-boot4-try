@@ -22,17 +22,17 @@ public class NewArticleController {
 
     @GetMapping("/articles/new")
     public String newForm(Model model) {
-        model.addAttribute("article", new Article());
+        model.addAttribute("newArticleForm", new NewArticleForm());
         return "articles/new";
     }
 
     @PostMapping("/articles/new")
-    public String create(@Validated Article article, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String create(@Validated NewArticleForm form, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "articles/new";
         }
-        articleService.create(article);
+        articleService.create(form.toArticle());
         redirectAttributes.addFlashAttribute("message", messages.getMessage("MI001", null, Locale.getDefault()));
-        return "redirect:/articles/" + article.getId();
+        return "redirect:/";
     }
 }

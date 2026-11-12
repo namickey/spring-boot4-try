@@ -24,18 +24,19 @@ public class EditArticleController {
 
     @GetMapping("/articles/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
-        model.addAttribute("article", articleService.getById(id));
+        model.addAttribute("editArticleForm", articleService.getById(id));
         return "articles/edit";
     }
 
     @PostMapping("/articles/{id}/edit")
-    public String update(@PathVariable Long id, @Validated Article article, BindingResult result,
+    public String update(@PathVariable Long id, @Validated EditArticleForm form, BindingResult result,
             RedirectAttributes redirectAttributes) {
-        article.setId(id);
         if (result.hasErrors()) {
             return "articles/edit";
         }
         try {
+            Article article = form.toArticle();
+            article.setId(id);
             articleService.update(article);
         } catch (OptimisticLockingFailureException e) {
             result.reject(e.getMessage());
