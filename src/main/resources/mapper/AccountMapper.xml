@@ -10,7 +10,7 @@
         WHERE username = #{username}
     </select>
 
-    <update id="update">
+    <update id="updatePassword">
         UPDATE accounts
         SET password = #{password},
             updated_at = CURRENT_TIMESTAMP,

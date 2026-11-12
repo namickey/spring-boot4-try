@@ -25,7 +25,7 @@ public class DeleteArticleController {
             RedirectAttributes redirectAttributes) {
         
         if (result.hasErrors()) {
-            return "/";
+            return "redirect:/";
         }
 
         try {

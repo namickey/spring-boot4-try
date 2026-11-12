@@ -6,6 +6,7 @@ import java.util.Objects;
 import org.springframework.context.MessageSource;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class EditPasswordController {
 
     private final AccountService accountService;
+    private final PasswordEncoder passwordEncoder;
     private final MessageSource messages;
 
     @GetMapping("/account/password/edit")
@@ -33,19 +35,18 @@ public class EditPasswordController {
     }
 
     @PostMapping("/account/password/edit")
-    public String edit(@Validated EditPasswordForm form, BindingResult result, Authentication authentication, Model model,
+    public String edit(@Validated EditPasswordForm form, BindingResult result, Authentication authentication,
             RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             return "account/password-edit";
         }
 
-        if (!Objects.equals(form.getNewPassword(), form.getReNewPassword())) {
-            model.addAttribute("error", messages.getMessage("ME001", null, Locale.getDefault()));
-            return "account/password-edit";
-        }
         try {
-            accountService.updatePassword(authentication.getName(), form.getNewPassword(), form.getVersionNo());
+            Account account = form.toAccount();
+            account.setUsername(authentication.getName());
+            account.setPassword(passwordEncoder.encode(form.getNewPassword()));
+            accountService.updatePassword(account);
         } catch (OptimisticLockingFailureException e) {
             result.reject(e.getMessage());
             return "account/password-edit";

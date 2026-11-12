@@ -11,6 +11,8 @@ import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.example.demo.common.messege.MessageConst;
+
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +25,7 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(AppException.class)
     public String handleAppException(AppException e, HttpServletResponse response, Model model) {
-        int status = "ME404".equals(e.getMessageId())
+        int status = MessageConst.ME404.equals(e.getMessageId())
                 ? HttpStatus.NOT_FOUND.value()
                 : HttpStatus.BAD_REQUEST.value();
         response.setStatus(status);

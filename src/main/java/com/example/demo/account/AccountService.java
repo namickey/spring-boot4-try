@@ -1,9 +1,10 @@
 package com.example.demo.account;
 
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.example.demo.common.messege.MessageConst;
 
 import lombok.RequiredArgsConstructor;
 
@@ -13,17 +14,16 @@ import lombok.RequiredArgsConstructor;
 public class AccountService {
 
     private final AccountMapper accountMapper;
-    private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public Account findByUsername(String username) {
         return accountMapper.findByUsername(username);
     }
 
-    public void updatePassword(String username, String newPassword, Integer versionNo) {
-        int i = accountMapper.update(username, passwordEncoder.encode(newPassword), versionNo);
+    public void updatePassword(Account account) {
+        int i = accountMapper.updatePassword(account);
         if (i == 0) {
-            throw new OptimisticLockingFailureException("ME901");
+            throw new OptimisticLockingFailureException(MessageConst.ME901);
         }
     }
 }

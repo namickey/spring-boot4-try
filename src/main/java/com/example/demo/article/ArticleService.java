@@ -6,6 +6,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.common.messege.MessageConst;
 import com.example.demo.core.exception.AppException;
 
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class ArticleService {
     public Article getById(Long id) {
         Article article = articleMapper.findById(id);
         if (article == null) {
-            throw new AppException("ME404");
+            throw new AppException(MessageConst.ME404);
         }
         return article;
     }
@@ -38,14 +39,14 @@ public class ArticleService {
     public void update(Article article) {
         int i = articleMapper.update(article);
         if (i == 0) {
-            throw new OptimisticLockingFailureException("ME901");
+            throw new OptimisticLockingFailureException(MessageConst.ME901);
         }
     }
 
     public void deleteById(Long id, Integer versionNo) {
         int i = articleMapper.deleteById(id, versionNo);
         if (i == 0) {
-            throw new OptimisticLockingFailureException("ME901");
+            throw new OptimisticLockingFailureException(MessageConst.ME901);
         }
     }
 }
