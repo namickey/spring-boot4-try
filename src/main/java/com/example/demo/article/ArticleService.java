@@ -3,10 +3,10 @@ package com.example.demo.article;
 import java.util.List;
 
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
+
+import com.example.demo.core.exception.AppException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +26,7 @@ public class ArticleService {
     public Article getById(Long id) {
         Article article = articleMapper.findById(id);
         if (article == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Article not found: " + id);
+            throw new AppException("ME404");
         }
         return article;
     }

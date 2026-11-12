@@ -11,10 +11,6 @@ import com.example.demo.account.AccountService;
 
 import lombok.RequiredArgsConstructor;
 
-/**
- * 本番用
- * DBで管理しているユーザ情報を取得するクラス
- */
 @Component
 @RequiredArgsConstructor
 public class DbUserDetailsService implements UserDetailsService {
@@ -24,11 +20,9 @@ public class DbUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        // アカウントテーブルからユーザ情報を取得する
         Account account = accountService.findByUsername(username);
 
         if (account == null) {
-            // 存在しないユーザ
             throw new UsernameNotFoundException(username);
         }
 

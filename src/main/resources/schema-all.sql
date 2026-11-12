@@ -13,8 +13,8 @@ DROP TABLE IF EXISTS accounts CASCADE;
 
 CREATE TABLE accounts (
     username   VARCHAR(100)  NOT NULL PRIMARY KEY,
-    roles      VARCHAR(100),
-    password   VARCHAR(100),
+    roles      VARCHAR(100)  NOT NULL,
+    password   VARCHAR(100)  NOT NULL,
     email      VARCHAR(100),
     created_at TIMESTAMP     NOT NULL,
     updated_at TIMESTAMP     NOT NULL,
