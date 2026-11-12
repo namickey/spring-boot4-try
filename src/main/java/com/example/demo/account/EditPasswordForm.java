@@ -7,13 +7,16 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class Password {
-    @Length(max=10)
+public class EditPasswordForm {
+    
     @NotBlank
+    @Length(max=10)
     private String newPassword;
-    @Length(max=10)
+    
     @NotBlank
+    @Length(max=10)
     private String reNewPassword;
+    
     @NotNull
     private Integer versionNo;
 }

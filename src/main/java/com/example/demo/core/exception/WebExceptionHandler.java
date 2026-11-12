@@ -47,5 +47,4 @@ public class WebExceptionHandler {
         response.setStatus(status);
         return "error";
     }
-
 }

@@ -48,5 +48,4 @@ public class ArticleService {
             throw new OptimisticLockingFailureException("ME901");
         }
     }
-
 }

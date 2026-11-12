@@ -11,13 +11,17 @@ import lombok.Data;
 public class Article {
 
     private Long id;
+
     @NotBlank
     @Length(max = 200)
     private String title;
+
     @NotBlank
     private String content;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private Integer versionNo;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
+    private Integer versionNo;
 }

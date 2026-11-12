@@ -20,7 +20,7 @@ public class AccountService {
         return accountMapper.findByUsername(username);
     }
 
-    public void update(String username, String newPassword, Integer versionNo){
+    public void update(String username, String newPassword, Integer versionNo) {
         int i = accountMapper.update(username, passwordEncoder.encode(newPassword), versionNo);
         if (i == 0) {
             throw new OptimisticLockingFailureException("ME901");

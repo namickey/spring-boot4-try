@@ -26,26 +26,26 @@ public class EditPasswordController {
     @GetMapping("/account/password/edit")
     public String editForm(Authentication authentication, Model model) {
         Account account = accountService.findByUsername(authentication.getName());
-        Password password = new Password();
-        password.setVersionNo(account.getVersionNo());
-        model.addAttribute("password", password);
+        EditPasswordForm form = new EditPasswordForm();
+        form.setVersionNo(account.getVersionNo());
+        model.addAttribute("editPasswordForm", form);
         return "account/password-edit";
     }
 
     @PostMapping("/account/password/edit")
-    public String edit(@Validated Password password, BindingResult result, Authentication authentication, Model model,
+    public String edit(@Validated EditPasswordForm form, BindingResult result, Authentication authentication, Model model,
             RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             return "account/password-edit";
         }
 
-        if (!Objects.equals(password.getNewPassword(), password.getReNewPassword())) {
+        if (!Objects.equals(form.getNewPassword(), form.getReNewPassword())) {
             model.addAttribute("error", messages.getMessage("ME001", null, Locale.getDefault()));
             return "account/password-edit";
         }
         try {
-            accountService.update(authentication.getName(), password.getNewPassword(), password.getVersionNo());
+            accountService.update(authentication.getName(), form.getNewPassword(), form.getVersionNo());
         } catch (OptimisticLockingFailureException e) {
             result.reject(e.getMessage());
             return "account/password-edit";
