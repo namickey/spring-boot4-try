@@ -23,7 +23,6 @@ public class DeleteArticleController {
     @PostMapping("/articles/{id}/delete")
     public String delete(@PathVariable Long id, @Validated DeleteArticleForm form, BindingResult result,
             RedirectAttributes redirectAttributes) {
-        
         if (result.hasErrors()) {
             return "redirect:/";
         }

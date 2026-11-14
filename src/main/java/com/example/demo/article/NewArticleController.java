@@ -27,7 +27,8 @@ public class NewArticleController {
     }
 
     @PostMapping("/articles/new")
-    public String create(@Validated NewArticleForm form, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String create(@Validated NewArticleForm form, BindingResult result,
+        RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "articles/new";
         }

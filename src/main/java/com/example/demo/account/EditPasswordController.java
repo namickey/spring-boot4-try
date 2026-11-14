@@ -37,7 +37,6 @@ public class EditPasswordController {
     @PostMapping("/account/password/edit")
     public String edit(@Validated EditPasswordForm form, BindingResult result, Authentication authentication,
             RedirectAttributes redirectAttributes) {
-
         if (result.hasErrors()) {
             return "account/password-edit";
         }

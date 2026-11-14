@@ -25,7 +25,7 @@ public class WebSecurityConfig {
             .logoutSuccessUrl("/")
         ).authorizeHttpRequests(authz -> authz
             .requestMatchers("/").permitAll()
-            .requestMatchers("/articles/new/**").authenticated()
+            .requestMatchers("/articles/new").authenticated()
             .requestMatchers("/articles/*/edit").authenticated()
             .requestMatchers("/articles/*/delete").authenticated()
             .requestMatchers("/articles/*").permitAll()
