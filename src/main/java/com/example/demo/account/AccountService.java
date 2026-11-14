@@ -4,7 +4,8 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.common.messege.MessageConst;
+import com.example.demo.common.message.MessageConst;
+import com.example.demo.core.exception.SystemException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +18,11 @@ public class AccountService {
 
     @Transactional(readOnly = true)
     public Account findByUsername(String username) {
-        return accountMapper.findByUsername(username);
+        Account account = accountMapper.findByUsername(username);
+        if (account == null) {
+            throw new SystemException("ME999");
+        }
+        return account;
     }
 
     public void updatePassword(Account account) {

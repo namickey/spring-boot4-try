@@ -5,6 +5,8 @@
     <header th:replace="~{fragments/common :: nav}"></header>
     <main class="container mt-4 mb-5">
         <h1 class="h3 mb-4">記事編集</h1>
+        <div class="alert alert-success" th:if="${message}" th:text="${message}"></div>
+        <div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
         <form th:action="@{'/articles/' + ${editArticleForm.id} + '/edit'}" th:object="${editArticleForm}" method="post">
             <div class="alert alert-danger" th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></div>
             <div class="mb-3">

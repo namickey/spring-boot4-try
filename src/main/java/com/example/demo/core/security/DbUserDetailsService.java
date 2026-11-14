@@ -25,11 +25,11 @@ public class DbUserDetailsService implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException(username);
         }
-
+        String roles = account.getRoles();
         return User.builder()
                 .username(username)
                 .password(account.getPassword())
-                .roles(account.getRoles().split(","))
+                .roles(roles == null ? new String[0] : roles.split(","))
                 .build();
     }
 }

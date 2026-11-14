@@ -6,7 +6,7 @@ import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.common.messege.MessageConst;
+import com.example.demo.common.message.MessageConst;
 import com.example.demo.core.exception.AppException;
 
 import lombok.RequiredArgsConstructor;
