@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.common.message.MessageConst;
+import com.example.demo.core.message.MessageConst;
 
 import lombok.RequiredArgsConstructor;
 

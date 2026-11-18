@@ -1,4 +1,4 @@
-package com.example.demo.common.message;
+package com.example.demo.core.message;
 
 public final class MessageConst {
     

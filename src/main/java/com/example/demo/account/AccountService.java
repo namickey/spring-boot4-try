@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.common.message.MessageConst;
+import com.example.demo.core.message.MessageConst;
 
 import lombok.RequiredArgsConstructor;
 

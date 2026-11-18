@@ -3,6 +3,8 @@ package com.example.demo.account;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 
+import com.example.demo.core.validator.CharTypes;
+
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,10 +15,12 @@ public class EditPasswordForm {
 
     @NotBlank
     @Length(max = 10)
+    @CharTypes
     private String newPassword;
 
     @NotBlank
     @Length(max = 10)
+    @CharTypes
     private String reNewPassword;
 
     @NotNull
