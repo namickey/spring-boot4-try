@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.message.MessageConst;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -28,12 +30,13 @@ public class NewArticleController {
 
     @PostMapping("/articles/new")
     public String create(@Validated NewArticleForm form, BindingResult result,
-        RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "articles/new";
         }
         articleService.create(form.toArticle());
-        redirectAttributes.addFlashAttribute("message", messages.getMessage("MI001", null, Locale.getDefault()));
+        redirectAttributes.addFlashAttribute("message",
+                messages.getMessage(MessageConst.MI001, null, Locale.getDefault()));
         return "redirect:/";
     }
 }

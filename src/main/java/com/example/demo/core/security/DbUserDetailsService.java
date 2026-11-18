@@ -19,11 +19,8 @@ public class DbUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Account account = accountService.findByUsername(username);
+        Account account = accountService.getByUsername(username);
 
-        if (account == null) {
-            throw new UsernameNotFoundException(username);
-        }
         String roles = account.getRoles();
         return User.builder()
                 .username(username)

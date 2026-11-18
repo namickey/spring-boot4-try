@@ -30,6 +30,7 @@ public class EditPasswordForm {
     public Account toAccount() {
         Account account = new Account();
         BeanUtils.copyProperties(this, account);
+        account.setPassword(newPassword);
         return account;
     }
 }

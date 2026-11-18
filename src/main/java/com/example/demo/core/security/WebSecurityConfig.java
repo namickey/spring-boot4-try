@@ -18,22 +18,21 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        .formLogin(login -> login
-            .defaultSuccessUrl("/", true)
-            .permitAll()
-        ).logout(logout -> logout
-            .logoutSuccessUrl("/")
-        ).authorizeHttpRequests(authz -> authz
-            .requestMatchers("/").permitAll()
-            .requestMatchers("/articles/new").authenticated()
-            .requestMatchers("/articles/*/edit").authenticated()
-            .requestMatchers("/articles/*/delete").authenticated()
-            .requestMatchers("/articles/*").permitAll()
-            .anyRequest().authenticated()
-        ).headers(headers -> headers
-            .frameOptions(frameOptions -> frameOptions
-                .sameOrigin())
-        );
+                .formLogin(login -> login
+                        .defaultSuccessUrl("/", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/"))
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/articles/new").authenticated()
+                        .requestMatchers("/articles/*/edit").authenticated()
+                        .requestMatchers("/articles/*/delete").authenticated()
+                        .requestMatchers("/articles/*").permitAll()
+                        .anyRequest().authenticated())
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions
+                                .sameOrigin()));
         return http.build();
     }
 }

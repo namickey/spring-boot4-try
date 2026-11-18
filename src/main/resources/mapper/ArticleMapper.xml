@@ -16,7 +16,7 @@
         WHERE id = #{id}
     </select>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert">
         INSERT INTO articles (title, content, created_at, updated_at)
         VALUES (#{title}, #{content}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
     </insert>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.message.MessageConst;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -42,7 +44,7 @@ public class EditArticleController {
             result.reject(e.getMessage());
             return "articles/edit";
         }
-        redirectAttributes.addFlashAttribute("message", messages.getMessage("MI002", null, Locale.getDefault()));
+        redirectAttributes.addFlashAttribute("message", messages.getMessage(MessageConst.MI002, null, Locale.getDefault()));
         return "redirect:/articles/" + id;
     }
 }

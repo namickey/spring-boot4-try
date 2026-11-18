@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.message.MessageConst;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -34,7 +36,7 @@ public class DeleteArticleController {
                     messages.getMessage(e.getMessage(), null, Locale.getDefault()));
             return "redirect:/";
         }
-        redirectAttributes.addFlashAttribute("message", messages.getMessage("MI003", null, Locale.getDefault()));
+        redirectAttributes.addFlashAttribute("message", messages.getMessage(MessageConst.MI003, null, Locale.getDefault()));
         return "redirect:/";
     }
 }

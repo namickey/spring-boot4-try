@@ -1,12 +1,10 @@
 package com.example.demo.account;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import org.springframework.context.MessageSource;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.message.MessageConst;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -22,12 +22,11 @@ import lombok.RequiredArgsConstructor;
 public class EditPasswordController {
 
     private final AccountService accountService;
-    private final PasswordEncoder passwordEncoder;
     private final MessageSource messages;
 
     @GetMapping("/account/password/edit")
     public String editForm(Authentication authentication, Model model) {
-        Account account = accountService.findByUsername(authentication.getName());
+        Account account = accountService.getByUsername(authentication.getName());
         EditPasswordForm form = new EditPasswordForm();
         form.setVersionNo(account.getVersionNo());
         model.addAttribute("editPasswordForm", form);
@@ -44,14 +43,13 @@ public class EditPasswordController {
         try {
             Account account = form.toAccount();
             account.setUsername(authentication.getName());
-            account.setPassword(passwordEncoder.encode(form.getNewPassword()));
             accountService.updatePassword(account);
         } catch (OptimisticLockingFailureException e) {
             result.reject(e.getMessage());
             return "account/password-edit";
         }
 
-        redirectAttributes.addFlashAttribute("message", messages.getMessage("MI004", null, Locale.getDefault()));
-        return "redirect:/account/password/edit";
+        redirectAttributes.addFlashAttribute("message", messages.getMessage(MessageConst.MI004, null, Locale.getDefault()));
+        return "redirect:/";
     }
 }
