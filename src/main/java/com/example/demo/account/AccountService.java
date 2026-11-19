@@ -32,7 +32,7 @@ public class AccountService {
         Account acc = new Account();
         BeanUtils.copyProperties(account, acc);
         acc.setPassword(passwordEncoder.encode(account.getPassword()));
-        int i = accountMapper.updatePassword(account);
+        int i = accountMapper.updatePassword(acc);
         if (i == 0) {
             throw new OptimisticLockingFailureException(MessageConst.ME901);
         }

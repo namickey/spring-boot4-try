@@ -14,12 +14,12 @@ import lombok.Data;
 public class EditPasswordForm {
 
     @NotBlank
-    @Length(max = 10)
+    @Length(min = 2, max = 10)
     @CharTypes
     private String newPassword;
 
     @NotBlank
-    @Length(max = 10)
+    @Length(min = 2, max = 10)
     @CharTypes
     private String reNewPassword;
 

@@ -15,6 +15,8 @@ public class Account {
 
     private String email;
 
+    private String lockout;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

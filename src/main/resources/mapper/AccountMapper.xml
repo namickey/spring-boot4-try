@@ -5,7 +5,7 @@
 <mapper namespace="com.example.demo.account.AccountMapper">
 
     <select id="findByUsername" resultType="com.example.demo.account.Account">
-        SELECT username, roles, password, email, created_at, updated_at, version_no
+        SELECT username, roles, password, email, lockout, created_at, updated_at, version_no
         FROM accounts
         WHERE username = #{username}
     </select>

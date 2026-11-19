@@ -16,6 +16,7 @@ CREATE TABLE accounts (
     roles      VARCHAR(100),
     password   VARCHAR(100)  NOT NULL,
     email      VARCHAR(100),
+    lockout    CHAR(1),
     created_at TIMESTAMP     NOT NULL,
     updated_at TIMESTAMP     NOT NULL,
     version_no INT           NOT NULL DEFAULT 0

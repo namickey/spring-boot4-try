@@ -2,6 +2,7 @@ package com.example.demo.core.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,12 +20,18 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .formLogin(login -> login
+                        .loginPage("/login")
                         .defaultSuccessUrl("/", true)
+                        .failureHandler((request, response, exception) -> {
+                            String target = exception instanceof LockedException ? "/login?locked" : "/login?error";
+                            response.sendRedirect(request.getContextPath() + target);
+                        })
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .requestMatchers("/articles/new").authenticated()
                         .requestMatchers("/articles/*/edit").authenticated()
                         .requestMatchers("/articles/*/delete").authenticated()

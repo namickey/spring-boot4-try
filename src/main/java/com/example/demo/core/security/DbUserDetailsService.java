@@ -23,6 +23,7 @@ public class DbUserDetailsService implements UserDetailsService {
 
         String roles = account.getRoles();
         return User.builder()
+                .accountLocked("1".equals(account.getLockout()))
                 .username(username)
                 .password(account.getPassword())
                 .roles(roles == null ? new String[0] : roles.split(","))
