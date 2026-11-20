@@ -38,6 +38,7 @@
         update accounts
         set lockout = '1',
         locked_at = CURRENT_TIMESTAMP,
+        failed_count = 0,
         updated_at = CURRENT_TIMESTAMP
         where username = #{username}
     </update>

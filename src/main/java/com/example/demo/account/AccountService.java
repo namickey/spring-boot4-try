@@ -44,14 +44,12 @@ public class AccountService {
 
     public void loginFailure(String username) {
         Account account = accountMapper.findByUsername(username);
-        if (account != null && "0".endsWith(account.getLockout())) {
+        if (account != null && !account.isLocked()) {
             if (account.getFailedCount() >= 2) {
-                accountMapper.updateFailedCount(username);
                 accountMapper.lockout(username);
             } else {
                 accountMapper.updateFailedCount(username);
             }
         }
-
     }
 }
