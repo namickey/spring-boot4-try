@@ -17,6 +17,10 @@ public class Account {
 
     private String lockout;
 
+    private LocalDateTime lockedAt;
+
+    private Integer failedCount;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

@@ -22,8 +22,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException {
+        
         String username = request.getParameter("username");
         accountService.loginFailure(username);
+
         String target = exception instanceof LockedException ? "/login?locked" : "/login?error";
         response.sendRedirect(request.getContextPath() + target);
     }

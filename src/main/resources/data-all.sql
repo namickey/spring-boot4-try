@@ -3,6 +3,6 @@ INSERT INTO articles (title, content, created_at, updated_at) VALUES
 ('MyBatis で始めるデータアクセス', 'Mapper インターフェースと XML マッパーを組み合わせることで、SQL を直接記述しながら型安全にデータアクセスできます。', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 ('Thymeleaf テンプレートの基本', 'Thymeleaf を使うと、HTML をそのままテンプレートとして扱いながらサーバーサイドでレンダリングできます。', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
-INSERT INTO accounts (username, roles, password, email, lockout, failed_count, created_at, updated_at) VALUES
-('root', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'root@xxx', '0', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('user', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'user@xxx', '0', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO accounts (username, roles, password, email, lockout, locked_at, failed_count, created_at, updated_at) VALUES
+('root', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'root@xxx', '0', null, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('user', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 'user@xxx', '0', null, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

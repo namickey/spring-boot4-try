@@ -10,5 +10,9 @@ public interface AccountMapper {
 
     int updatePassword(Account account);
 
+    int updateLoginSuccess(@Param("username") String username);
+
     int updateFailedCount(@Param("username") String username);
+
+    int lockout(@Param("username") String username);
 }

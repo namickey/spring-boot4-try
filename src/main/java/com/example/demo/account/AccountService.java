@@ -38,7 +38,20 @@ public class AccountService {
         }
     }
 
+    public void loginSuccess(String username) {
+        accountMapper.updateLoginSuccess(username);
+    }
+
     public void loginFailure(String username) {
-        accountMapper.updateFailedCount(username);
+        Account account = accountMapper.findByUsername(username);
+        if (account != null && "0".endsWith(account.getLockout())) {
+            if (account.getFailedCount() >= 2) {
+                accountMapper.updateFailedCount(username);
+                accountMapper.lockout(username);
+            } else {
+                accountMapper.updateFailedCount(username);
+            }
+        }
+
     }
 }
