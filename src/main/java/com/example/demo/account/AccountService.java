@@ -37,4 +37,8 @@ public class AccountService {
             throw new OptimisticLockingFailureException(MessageConst.ME901);
         }
     }
+
+    public void loginFailure(String username) {
+        accountMapper.updateFailedCount(username);
+    }
 }

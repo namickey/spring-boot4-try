@@ -2,7 +2,6 @@ package com.example.demo.core.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,15 +16,13 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, LoginSuccessHandler loginSuccessHandler,
+            LoginFailureHandler loginFailureHandler) throws Exception {
         http
                 .formLogin(login -> login
                         .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
-                        .failureHandler((request, response, exception) -> {
-                            String target = exception instanceof LockedException ? "/login?locked" : "/login?error";
-                            response.sendRedirect(request.getContextPath() + target);
-                        })
+                        .successHandler(loginSuccessHandler)
+                        .failureHandler(loginFailureHandler)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/"))
@@ -36,7 +33,10 @@ public class WebSecurityConfig {
                         .requestMatchers("/articles/*/edit").authenticated()
                         .requestMatchers("/articles/*/delete").authenticated()
                         .requestMatchers("/articles/*").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
                         .anyRequest().authenticated())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**"))
                 .headers(headers -> headers
                         .frameOptions(frameOptions -> frameOptions
                                 .sameOrigin()));

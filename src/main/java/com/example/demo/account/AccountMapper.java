@@ -9,4 +9,6 @@ public interface AccountMapper {
     Account findByUsername(@Param("username") String username);
 
     int updatePassword(Account account);
+
+    int updateFailedCount(@Param("username") String username);
 }

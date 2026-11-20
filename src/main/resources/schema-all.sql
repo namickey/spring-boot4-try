@@ -17,6 +17,7 @@ CREATE TABLE accounts (
     password   VARCHAR(100)  NOT NULL,
     email      VARCHAR(100),
     lockout    CHAR(1),
+    failed_count INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP     NOT NULL,
     updated_at TIMESTAMP     NOT NULL,
     version_no INT           NOT NULL DEFAULT 0

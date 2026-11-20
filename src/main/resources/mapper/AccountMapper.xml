@@ -19,4 +19,10 @@
         AND version_no = #{versionNo}
     </update>
 
+    <update id="updateFailedCount">
+        update accounts
+        set failed_count = failed_count + 1
+        where username = #{username}
+    </update>
+
 </mapper>
