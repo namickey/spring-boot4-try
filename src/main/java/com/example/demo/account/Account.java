@@ -16,9 +16,11 @@ public class Account {
 
     private String password;
 
+    private Integer passwordInit;
+
     private String email;
 
-    private String lockout;
+    private Integer lockout;
 
     private LocalDateTime lockedAt;
 
@@ -31,7 +33,7 @@ public class Account {
     private Integer versionNo;
 
     public boolean isLocked() {
-        return "1".equals(this.lockout)
+        return this.lockout == 1
                     && this.lockedAt.isAfter(LocalDateTime.now().minus(LOCKOUT_DURATION));
     }
 }
