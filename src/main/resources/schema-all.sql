@@ -24,3 +24,14 @@ CREATE TABLE accounts (
     updated_at   TIMESTAMP     NOT NULL,
     version_no   INT           NOT NULL DEFAULT 0
 );
+
+DROP TABLE IF EXISTS password_historys CASCADE;
+
+CREATE TABLE password_historys (
+    username     VARCHAR(100)  NOT NULL,
+    edited_at    TIMESTAMP     NOT NULL,
+    password     VARCHAR(100)  NOT NULL,
+    created_at   TIMESTAMP     NOT NULL,
+    updated_at   TIMESTAMP     NOT NULL,
+    PRIMARY KEY(username, edited_at, password)
+);
