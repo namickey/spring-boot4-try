@@ -18,6 +18,9 @@ public class AccountService {
 
     private final AccountMapper accountMapper;
     private final PasswordEncoder passwordEncoder;
+    private final PasswordHistoryMapper passwordHistoryMapper;
+
+    private static final int PASSWORD_HISTRY_LIMIT = 3;
 
     @Transactional(readOnly = true)
     public Account getByUsername(String username) {
@@ -36,6 +39,8 @@ public class AccountService {
         if (i == 0) {
             throw new OptimisticLockingFailureException(MessageConst.ME901);
         }
+        passwordHistoryMapper.insert(acc.getUsername(), acc.getPassword());
+        passwordHistoryMapper.deleteOverLimit(acc.getUsername(), PASSWORD_HISTRY_LIMIT);
     }
 
     public void loginSuccess(String username) {
