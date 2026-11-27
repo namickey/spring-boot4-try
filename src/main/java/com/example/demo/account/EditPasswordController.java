@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.core.exception.AppException;
 import com.example.demo.core.message.MessageConst;
 
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,9 @@ public class EditPasswordController {
             account.setUsername(authentication.getName());
             accountService.updatePassword(account);
         } catch (OptimisticLockingFailureException e) {
+            result.reject(e.getMessage());
+            return "account/password-edit";
+        } catch (AppException e) {
             result.reject(e.getMessage());
             return "account/password-edit";
         }

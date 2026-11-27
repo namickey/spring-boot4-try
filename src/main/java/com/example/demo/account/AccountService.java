@@ -1,5 +1,7 @@
 package com.example.demo.account;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -7,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.core.exception.AppException;
 import com.example.demo.core.message.MessageConst;
 
 import lombok.RequiredArgsConstructor;
@@ -32,6 +35,15 @@ public class AccountService {
     }
 
     public void updatePassword(Account account) {
+
+        List<PasswordHistory> list = passwordHistoryMapper.findRecentByUsername(account.getUsername(),
+                PASSWORD_HISTRY_LIMIT);
+        for (PasswordHistory passwordHistory : list) {
+            if (passwordEncoder.matches(account.getPassword(), passwordHistory.getPassword())){
+                throw new AppException("ME904");
+            }
+        }
+
         Account acc = new Account();
         BeanUtils.copyProperties(account, acc);
         acc.setPassword(passwordEncoder.encode(account.getPassword()));

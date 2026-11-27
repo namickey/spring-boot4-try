@@ -9,6 +9,7 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class EditPasswordForm {
@@ -16,11 +17,13 @@ public class EditPasswordForm {
     @NotBlank
     @Length(min = 2, max = 10)
     @CharTypes
+    @ToString.Exclude
     private String newPassword;
 
     @NotBlank
     @Length(min = 2, max = 10)
     @CharTypes
+    @ToString.Exclude
     private String reNewPassword;
 
     @NotNull

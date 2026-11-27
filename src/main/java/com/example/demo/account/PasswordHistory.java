@@ -3,6 +3,7 @@ package com.example.demo.account;
 import java.time.LocalDateTime;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class PasswordHistory {
@@ -11,6 +12,7 @@ public class PasswordHistory {
 
     private LocalDateTime editedAt;
 
+    @ToString.Exclude
     private String password;
 
     private LocalDateTime createdAt;

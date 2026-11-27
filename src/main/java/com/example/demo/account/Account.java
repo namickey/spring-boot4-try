@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 public class Account {
@@ -14,6 +15,7 @@ public class Account {
 
     private String roles;
 
+    @ToString.Exclude
     private String password;
 
     private Integer passwordInit;
