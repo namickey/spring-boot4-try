@@ -5,7 +5,7 @@
 <mapper namespace="com.example.demo.account.AccountMapper">
 
     <select id="findByUsername" resultType="com.example.demo.account.Account">
-        SELECT username, roles, password, password_init, email, lockout, locked_at, failed_count, created_at, updated_at, version_no
+        SELECT username, roles, password, password_init, email, lockout, locked_at, failed_count, last_login_at, created_at, updated_at, version_no
         FROM accounts
         WHERE username = #{username}
     </select>
@@ -24,6 +24,7 @@
         UPDATE accounts
         SET failed_count = 0,
             lockout = '0',
+            last_login_at = CURRENT_TIMESTAMP,
             updated_at = CURRENT_TIMESTAMP
         WHERE username = #{username}
     </update>

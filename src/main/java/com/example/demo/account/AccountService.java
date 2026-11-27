@@ -1,5 +1,6 @@
 package com.example.demo.account;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -55,8 +56,10 @@ public class AccountService {
         passwordHistoryMapper.deleteOverLimit(acc.getUsername(), PASSWORD_HISTRY_LIMIT);
     }
 
-    public void loginSuccess(String username) {
+    public LocalDateTime loginSuccess(String username) {
+        LocalDateTime lastLoginAt = accountMapper.findByUsername(username).getLastLoginAt();
         accountMapper.updateLoginSuccess(username);
+        return lastLoginAt;
     }
 
     public void loginFailure(String username) {

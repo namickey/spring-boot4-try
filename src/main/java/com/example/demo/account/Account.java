@@ -28,6 +28,8 @@ public class Account {
 
     private Integer failedCount;
 
+    private LocalDateTime lastLoginAt;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

@@ -12,17 +12,18 @@ CREATE TABLE articles (
 DROP TABLE IF EXISTS accounts CASCADE;
 
 CREATE TABLE accounts (
-    username     VARCHAR(100)  NOT NULL PRIMARY KEY,
-    roles        VARCHAR(100),
-    password     VARCHAR(100)  NOT NULL,
-    password_init INT          NOT NULL DEFAULT 0,
-    email        VARCHAR(100),
-    lockout      INT           NOT NULL DEFAULT 0,
-    locked_at    TIMESTAMP,
-    failed_count INT           NOT NULL DEFAULT 0,
-    created_at   TIMESTAMP     NOT NULL,
-    updated_at   TIMESTAMP     NOT NULL,
-    version_no   INT           NOT NULL DEFAULT 0
+    username      VARCHAR(100)  NOT NULL PRIMARY KEY,
+    roles         VARCHAR(100),
+    password      VARCHAR(100)  NOT NULL,
+    password_init INT           NOT NULL DEFAULT 0,
+    email         VARCHAR(100),
+    lockout       INT           NOT NULL DEFAULT 0,
+    locked_at     TIMESTAMP,
+    failed_count  INT           NOT NULL DEFAULT 0,
+    last_login_at TIMESTAMP,
+    created_at    TIMESTAMP     NOT NULL,
+    updated_at    TIMESTAMP     NOT NULL,
+    version_no    INT           NOT NULL DEFAULT 0
 );
 
 DROP TABLE IF EXISTS password_historys CASCADE;
