@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,6 +25,11 @@ public class EditPasswordController {
 
     private final AccountService accountService;
     private final MessageSource messages;
+
+    @ModelAttribute("passwordInit")
+    public boolean passwordInit(Authentication authentication) {
+        return accountService.getByUsername(authentication.getName()).getPasswordInit() == 1;
+    }
 
     @GetMapping("/account/password/edit")
     public String editForm(Authentication authentication, Model model) {

@@ -5,4 +5,5 @@ INSERT INTO articles (title, content, created_at, updated_at) VALUES
 
 INSERT INTO accounts (username, roles, password, password_init, email, lockout, locked_at, failed_count, last_login_at, created_at, updated_at) VALUES
 ('root', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 0, 'root@xxx', 0, null, 0, null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-('user', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 0, 'user@xxx', 0, null, 0, null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+('user', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 0, 'user@xxx', 0, null, 0, null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('a', null, '$2a$12$dOrsbzXOAt5wL7JRNn5bW.mMzRnxQJZuWMYDMUDfy0QS24XFpJeYO', 1, 'user@xxx', 0, null, 0, null, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
