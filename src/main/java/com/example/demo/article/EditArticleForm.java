@@ -5,28 +5,18 @@ import org.springframework.beans.BeanUtils;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-public class EditArticleForm {
+public record EditArticleForm(
 
-    @NotNull
-    private Long id;
+        @NotNull Long id,
 
-    @NotBlank
-    @Length(max = 200)
-    private String title;
+        @NotBlank @Length(max = 200) String title,
 
-    @NotBlank
-    private String content;
+        @NotBlank String content,
 
-    @NotNull
-    private Integer versionNo;
-
-    public EditArticleForm(Article article) {
-        BeanUtils.copyProperties(article, this);
+        @NotNull Integer versionNo) {
+    public static EditArticleForm from(Article article) {
+        return new EditArticleForm(article.getId(), article.getTitle(), article.getContent(), article.getVersionNo());
     }
 
     public Article toArticle() {
@@ -34,4 +24,4 @@ public class EditArticleForm {
         BeanUtils.copyProperties(this, article);
         return article;
     }
-}
+};

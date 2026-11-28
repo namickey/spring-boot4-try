@@ -24,7 +24,7 @@ public class NewArticleController {
 
     @GetMapping("/articles/new")
     public String newForm(Model model) {
-        model.addAttribute("newArticleForm", new NewArticleForm());
+        model.addAttribute("newArticleForm", NewArticleForm.empty());
         return "articles/new";
     }
 

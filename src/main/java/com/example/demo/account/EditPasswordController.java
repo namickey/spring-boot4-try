@@ -28,8 +28,7 @@ public class EditPasswordController {
     @GetMapping("/account/password/edit")
     public String editForm(Authentication authentication, Model model) {
         Account account = accountService.getByUsername(authentication.getName());
-        EditPasswordForm form = new EditPasswordForm();
-        form.setVersionNo(account.getVersionNo());
+        EditPasswordForm form = new EditPasswordForm(null, null, account.getVersionNo());
         model.addAttribute("editPasswordForm", form);
         return "account/password-edit";
     }
@@ -53,7 +52,8 @@ public class EditPasswordController {
             return "account/password-edit";
         }
 
-        redirectAttributes.addFlashAttribute("message", messages.getMessage(MessageConst.MI004, null, Locale.getDefault()));
+        redirectAttributes.addFlashAttribute("message",
+                messages.getMessage(MessageConst.MI004, null, Locale.getDefault()));
         return "redirect:/";
     }
 }

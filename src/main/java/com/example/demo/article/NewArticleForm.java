@@ -4,18 +4,16 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 
-@Data
-public class NewArticleForm {
+public record NewArticleForm(
 
-    @NotBlank
-    @Length(max = 200)
-    private String title;
+        @NotBlank @Length(max = 200) String title,
+        @NotBlank String content
 
-    @NotBlank
-    private String content;
-
+) {
+    public static NewArticleForm empty(){
+        return new NewArticleForm(null, null);
+    }
     public Article toArticle() {
         Article article = new Article();
         BeanUtils.copyProperties(this, article);

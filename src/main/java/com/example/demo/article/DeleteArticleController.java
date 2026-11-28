@@ -30,7 +30,7 @@ public class DeleteArticleController {
         }
 
         try {
-            articleService.deleteById(id, form.getVersionNo());
+            articleService.deleteById(id, form.versionNo());
         } catch (OptimisticLockingFailureException e) {
             redirectAttributes.addFlashAttribute("error",
                     messages.getMessage(e.getMessage(), null, Locale.getDefault()));

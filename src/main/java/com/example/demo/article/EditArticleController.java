@@ -26,7 +26,7 @@ public class EditArticleController {
 
     @GetMapping("/articles/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
-        model.addAttribute("editArticleForm", new EditArticleForm(articleService.getById(id)));
+        model.addAttribute("editArticleForm", EditArticleForm.from(articleService.getById(id)));
         return "articles/edit";
     }
 
